@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="glyphicon glpyhicon-edit"></i> 编辑个人资料
+                        <i class="glyphicon glyphicon-edit"></i> 编辑个人资料
                     </h4>
                 </div>
 

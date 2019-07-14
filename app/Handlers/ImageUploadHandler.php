@@ -7,6 +7,13 @@ class ImageUploadHandler
     // 只允许以下后缀名的文件上传
     protected $allowed_ext = ['png', 'jpg', 'gif', 'jpeg'];
 
+    /**
+     * @param $file object 上传的文件流
+     * @param $folder string 存放的目录
+     * @param $file_prefix string 文件名前缀
+     * @param $max_width int 最大宽度
+     * @return array|bool
+     */
     public function save($file, $folder, $file_prefix)
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201907/14

@@ -17,7 +17,7 @@ class RepliesController extends Controller
 
 	public function store(ReplyRequest $request, Reply $reply)
 	{
-	    $reply->content = $request->content;
+	    $reply->content = $request->input('content');
 	    $reply->user_id = Auth::id();
 	    $reply->topic_id = $request->topic_id;
 	    $reply->save();
@@ -30,6 +30,6 @@ class RepliesController extends Controller
 		$this->authorize('destroy', $reply);
 		$reply->delete();
 
-		return redirect()->route('replies.index')->with('success', '评论删除成功！');
+		return redirect()->to($reply->topic->link())->with('success', '评论删除成功！');
 	}
 }

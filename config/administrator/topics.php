@@ -16,7 +16,7 @@ return [
             'title' => '话题',
             'sortable' => false,
             'output' => function ($value, $model) {
-                return '<div style="max-width: 260px">' . model_link($value, e($model)) . '</div>';
+                return '<div style="max-width: 260px">' . model_link($value, $model) . '</div>';
             },
         ],
         'user' => [
@@ -32,7 +32,7 @@ return [
             'title' => '分类',
             'sortable' => false,
             'output' => function ($value, $model) {
-                return model_admin_link(e($model->category->name), e($model->category));
+                return model_admin_link(e($model->category->name), $model->category);
             },
         ],
         'reply_count' => [

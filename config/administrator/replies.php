@@ -55,7 +55,7 @@ return [
             'type' => 'relationship',
             'name_field' => 'title',
             'autocomplete' => true,
-            'search_fields' => array("COUNT(id, ' ', name)"),
+            'search_fields' => array("CONCAT(id, ' ', name)"),
             'options_sort_field' => 'id',
         ],
         'content' => [
@@ -70,7 +70,7 @@ return [
             'type' => 'relationship',
             'name_field' => 'name',
             'autocomplete' => true,
-            'search_fields' => array("COUNT(id, ' ', name)"),
+            'search_fields' => array("CONCAT(id, ' ', name)"),
             'options_sort_field' => 'id',
         ],
         'topic' => [
@@ -78,7 +78,7 @@ return [
             'type' => 'relationship',
             'name_field' => 'title',
             'autocomplete' => true,
-            'search_fields' => array("COUNT(id, ' ', name)"),
+            'search_fields' => array("CONCAT(id, ' ', name)"),
             'options_sort_field' => 'id',
         ],
         'content' => [

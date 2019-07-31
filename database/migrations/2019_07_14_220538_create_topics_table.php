@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicsTable extends Migration 
+class CreateTopicsTable extends Migration
 {
 	public function up()
 	{
 		Schema::create('topics', function(Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->comment('主键');
             $table->string('title')->index()->comment('帖子标题');
             $table->text('body')->comment('帖子内容');
             $table->bigInteger('user_id')->unsigned()->index()->comment('用户 ID');
@@ -18,7 +18,7 @@ class CreateTopicsTable extends Migration
             $table->integer('last_reply_user_id')->unsigned()->default(0)->comment('最后回复的用户 ID');
             $table->integer('order')->unsigned()->default(0)->comment('可用来做排序使用');
             $table->text('excerpt')->nullable()->comment('文章摘要，SEO 优化时使用');
-            $table->string('slug')->nullable()->comment('SEO 友好的 URL');
+            $table->string('slug')->nullable()->comment('title 翻译，SEO 友好的 URL');
             $table->timestamps();
         });
 	}

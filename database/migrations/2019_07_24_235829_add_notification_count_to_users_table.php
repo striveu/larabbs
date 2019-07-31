@@ -14,7 +14,7 @@ class AddNotificationCountToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('notification_count')->unsigned()->default(0);
+            $table->integer('notification_count')->unsigned()->default(0)->comment('未读消息数');
         });
     }
 

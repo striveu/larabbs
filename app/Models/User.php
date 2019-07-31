@@ -45,6 +45,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $last_actived_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastActivedAt($value)
  */
 class User extends Authenticatable implements MustVerifyEmailContract
 {

@@ -22,7 +22,7 @@ class CaptchasController extends Controller
             'expired_at' => $expiredAt->toDateTimeString(),
             'captcha_image_content' => $captcha->inline(),
         ];
-
+        //
         return $this->response->array($result)->setStatusCode(201);
     }
 }

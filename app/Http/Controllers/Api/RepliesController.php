@@ -7,6 +7,7 @@ use App\Models\Topic;
 use App\Models\Reply;
 use App\Transformers\ReplyTransformer;
 use App\Http\Requests\Api\ReplyRequest;
+use App\Models\User;
 
 class RepliesController extends Controller
 {
@@ -31,5 +32,35 @@ class RepliesController extends Controller
         $reply->delete();
 
         return $this->response->noContent();
+    }
+
+    public function index(Topic $topic, Request $request)
+    {
+        /**
+         * 关闭 Dingo 的预加载
+         * 有可能使用深层 include 地方都可以暂时这么处理。
+         */
+        app(\Dingo\Api\Transformer\Factory::class)->disableEagerLoading();
+
+        $replies = $topic->replies()->paginate(20);
+
+        if ($request->include) {
+            $replies->load(explode(',', $request->include));
+        }
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+    }
+
+    public function userIndex(User $user, Request $request)
+    {
+        app(\Dingo\Api\Transformer\Factory::class)->disableEagerLoading();
+
+        $replies = $user->replies()->paginate(20);
+
+        if ($request->include) {
+            $replies->load(explode(',', $request->include));
+        }
+
+        return $this->response->paginator($replies, new ReplyTransformer());
     }
 }

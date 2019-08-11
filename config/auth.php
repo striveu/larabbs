@@ -42,14 +42,10 @@ return [
         ],
 
         'api' => [
-            'driver' => 'jwt',
+            'driver' => 'passport',
             'provider' => 'users',
             'hash' => false,
         ],
-    ],
-
-    'auth' => [
-        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
     ],
 
     /*

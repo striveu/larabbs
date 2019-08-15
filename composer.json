@@ -26,6 +26,7 @@
         "mews/purifier": "~2.0",
         "overtrue/easy-sms": "^1.1",
         "overtrue/laravel-lang": "~3.0",
+        "overtrue/laravel-wechat": "~4.0",
         "overtrue/pinyin": "~3.0",
         "predis/predis": "~1.1",
         "socialiteproviders/weixin": "^4.0",
@@ -48,7 +49,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-pcntl": "7.2",
+            "ext-posix": "7.2"
+        }
     },
     "extra": {
         "laravel": {

@@ -15,7 +15,7 @@ class AddWeixinSessionKeyToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('weapp_openid')->nullable()->after('weixin_openid');
-            $table->string('session_key')->nullable()->after('weapp_openid');
+            $table->string('weixin_session_key')->nullable()->after('weapp_openid');
         });
     }
 
@@ -28,7 +28,7 @@ class AddWeixinSessionKeyToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('weapp_openid');
-            $table->dropColumn('session_key');
+            $table->dropColumn('weixin_session_key');
         });
     }
 }

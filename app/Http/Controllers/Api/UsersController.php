@@ -109,7 +109,7 @@ class UsersController extends Controller
 
         // meta 中返回 Token 信息
         return $this->response->item($user, new UserTransformer())
-            ->setMeata([
+            ->setMeta([
                 'access_token' => \Auth::guard('api')->fromUser($user),
                 'token_type' => 'Bearer',
                 'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60

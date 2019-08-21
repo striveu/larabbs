@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Jobs\TranslateSlug;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
@@ -115,5 +116,10 @@ class UsersController extends Controller
                 'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
             ])
             ->setStatusCode(201);
+    }
+
+    public function show(User $user)
+    {
+        return $this->response->item($user, new UserTransformer());
     }
 }

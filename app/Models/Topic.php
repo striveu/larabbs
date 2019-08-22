@@ -103,4 +103,9 @@ class Topic extends Model
         $this->reply_count = $this->replies->count();
         $this->save();
     }
+
+    public function topReplies()
+    {
+        return $this->replies()->limit(5);
+    }
 }

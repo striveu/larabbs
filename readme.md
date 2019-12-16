@@ -1,72 +1,133 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<h1 align="center">Welcome to LaraBBS 👋</h1>
+<p>
+<img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+<a href="larabbs.strive.net.cn">
+<img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+</a>
+<a href="License Url">
+<img alt="License: License" src="https://img.shields.io/badge/License-License-yellow.svg" target="_blank" />
+</a>
+<a href="https://twitter.com/Twitter">
+<img alt="Twitter: Twitter" src="https://img.shields.io/twitter/follow/Twitter.svg?style=social" target="_blank" />
+</a>
 </p>
 
-## About Laravel
+> A forum project base on Laravel 5.8
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🏠 [Homepage](larabbs.strive.net.cn)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Install
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. 克隆源代码：`git clone https://github.com/zhaiyuxinn/larabbs.git`
+2. 环境配置：
+	* `Homestead`
+		* 运行以下命令编辑 `Homestead.yaml` 文件：`homestead edit`
+		* 加入对应修改，如下所示：
+	   ```
+		 folders:
+			 - map: ~/my-path/larabbs/    # 你本地的项目目录地址
+				to: /home/vagrant/larbbs
+		sites:
+			- map: larabbs.test
+			  to: /home/vagrant/larabbs/public
+		 databases:
+			 - larabbs
+		 ``` 
 
-## Learning Laravel
+	 * 修改完成后保存，然后执行以下命令应用配置信息修改：`homestead provision`
+ > 注意：有些时候你需要重启才能看到应用。运行 `homestead halt` 然后 `homestead up` 进行重启。
+ 
+ * `Laradock`
+	 * 进入 `Laradock` 目录，运行 `docker-compose up -d mysql nginx phpmyadmin redis workspace` 启动容器；
+	 * 进入 `Laradock/nginx/sites` 目录下新建 `larabbs.conf` 文件，写入以下代码：
+	 
+	   ```
+	   server {
+			listen 80;
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+			server_name larabbs.test;
+			root /var/www/PHP/Code/larabbs/public;
+			index index.php index.html index.htm;
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1400 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+			location / {
+				 try_files $uri $uri/ /index.php$is_args$args;
+			}
 
-## Laravel Sponsors
+			location ~ \.php$ {
+				try_files $uri /index.php =404;
+				fastcgi_pass php-upstream;
+				fastcgi_index index.php;
+				fastcgi_buffers 16 16k;
+				fastcgi_buffer_size 32k;
+				fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+				#fixes timeouts
+				fastcgi_read_timeout 600;
+				include fastcgi_params;
+			}
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+			location ~ /\.ht {
+				deny all;
+			}
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+			location /.well-known/acme-challenge/ {
+				root /var/www/letsencrypt/;
+				log_not_found off;
+			}
+	}
 
-## Contributing
+	   ``` 
+	 * 重启 `nginx` 容器：`docker-compose restart nginx`;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. 安装扩展包依赖：`composer install`
+4. 生成配置文件
+	 * 首先执行：`cp .env.example .env`；
+	 * 找到 `API_PREFIX`，将其值设置为 `api`；
+	 * 修改数据库信息；
+	 * 使用 `Laradock` 的注意事项：
+		 * `DB_HOST` 请填写为 `mysql`；
+		 * 数据库需要自己创建
+5. 生成密钥：`php artisan key:generate`；
+6. 执行迁移：`php artisan migrate`；
+7. 执行填充：`php artisan db:seed`；
+8. 配置 `hosts` 文件：`172.17.0.1    larabbs.test`
 
-## Security Vulnerabilities
+## 前端工具集安装
+> 代码里自带编译后的前端代码，如果你不想开发前端样式的话，你是不需要配置前端工具集的，可直接跳过。
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* 安装 `node.js`；
+* 安装 `Laravel Elixir`：`npm install`；
+* 编译前端内容：`npm run dev`；
+* 监控修改并自动编译：`npm run watch-poll`；
 
-## License
+## 登录用户
+> 只有 Id 为 1 和 2 的用户有后台权限
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* `bar@example.com` 
+* `password`
+
+## Author
+
+👤 **Hug.m**
+
+* Twitter: [@Twitter](https://twitter.com/Twitter)
+* Github: [@striveu](https://github.com/striveu)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/striveu/larabbs/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+<a href="https://www.patreon.com/Patreon">
+<img src="https://cdn.learnku.com/uploads/images/201912/16/25461/sXfCIoQM0E.png!large" width="160">
+</a>
+
+## 📝 License
+
+Copyright © 2019 [Hug.m](https://github.com/striveu).<br />
+This project is [License](License Url) licensed.
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

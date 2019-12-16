@@ -17,12 +17,20 @@ class UsersTableSeeder extends Seeder
 
         // 头像假数据
         $avatars = [
-            'https://cdn.learnku.com/uploads/images/201710/14/1/s5ehp11z6s.png',
-            'https://cdn.learnku.com/uploads/images/201710/14/1/Lhd1SHqu86.png',
-            'https://cdn.learnku.com/uploads/images/201710/14/1/LOnMrqbHJn.png',
-            'https://cdn.learnku.com/uploads/images/201710/14/1/xAuDMxteQy.png',
-            'https://cdn.learnku.com/uploads/images/201710/14/1/ZqM7iaP4CR.png',
-            'https://cdn.learnku.com/uploads/images/201710/14/1/NDnzMutoxX.png',
+            'https://cdn.learnku.com/uploads/avatars/25461_1566040158.JPG!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/1_1530614766.png!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/5320_1470791886.jpeg!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/32249_1545124984.jpg!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/24372_1523868790.jpg!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/76_1451276555.png!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/29791_1552314544.jpeg!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/27516_1556075217.png!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/3995_1516760409.jpg!/both/100x100',
+            'https://cdn.learnku.com/uploads/avatars/851_1533190937.png!/both/100x100',
+            'https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png',
+            'https://cdn.learnku.com//uploads/communities/iAphQ2R2SYGDdQ6cd7aD.png',
+            'https://cdn.learnku.com//uploads/communities/WtC3cPLHzMbKRSZnagU9.png',
+            'https://cdn.learnku.com/uploads/avatars/5350_1481857380.jpg!/both/100x100',
         ];
 
         // 生成数据集合
@@ -44,8 +52,8 @@ class UsersTableSeeder extends Seeder
 
         // 单独处理第一个用户的数据
         $user = User::find(1);
-        $user->name = 'Hug.m';
-        $user->email = 'hug.m@foxmail.com';
+        $user->name = 'foo';
+        $user->email = 'bar@example.com';
         $user->avatar = 'https://cdn.learnku.com/uploads/images/201710/14/1/ZqM7iaP4CR.png';
         $user->save();
 

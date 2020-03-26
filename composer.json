@@ -13,6 +13,7 @@
         "dingo/api": "^2.3",
         "doctrine/dbal": " ~2.3",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "gregwar/captcha": "^1.1",
         "guzzlehttp/guzzle": "~6.3",
         "hieu-le/active": "~3.5",
@@ -22,6 +23,7 @@
         "laravel/horizon": "~3.1",
         "laravel/tinker": "^1.0",
         "liyu/dingo-serializer-switch": "^0.3.1",
+        "lorisleiva/laravel-deployer": "^0.3.0",
         "mews/captcha": "~2.0",
         "mews/purifier": "~2.0",
         "overtrue/easy-sms": "^1.1",
@@ -39,7 +41,6 @@
         "barryvdh/laravel-debugbar": "~3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "overtrue/laravel-query-logger": "^1.0",
@@ -89,6 +90,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta",
+            "@php artisan ide-helper:models --nowrite"
         ]
     }
 }

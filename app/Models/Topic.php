@@ -1,9 +1,18 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models;
 
 /**
- * App\Models\Topic
+ * App\Models\Topic.
  *
  * @property int $id
  * @property string $title 帖子标题
@@ -21,6 +30,7 @@ namespace App\Models;
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model ordered()
@@ -46,7 +56,7 @@ namespace App\Models;
 class Topic extends Model
 {
     protected $fillable = [
-        'title', 'body', 'category_id', 'excerpt', 'slug'
+        'title', 'body', 'category_id', 'excerpt', 'slug',
     ];
 
     public function replies()
@@ -70,10 +80,12 @@ class Topic extends Model
         switch ($order) {
             case 'recent':
                 $query->recent();
+
                 break;
 
             default:
                 $query->recentReplied();
+
                 break;
         }
         // 预加载防止 N+1 问题

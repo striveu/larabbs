@@ -1,6 +1,14 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -17,7 +25,8 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $date_time = $faker->date . ' ' . $faker->time;
+    $date_time = $faker->date.' '.$faker->time;
+
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,

@@ -1,25 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array', 'bindings', 'change-locale']
+    'middleware' => ['serializer:array', 'bindings', 'change-locale'],
 ], function ($api) {
-
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),
@@ -81,7 +76,7 @@ $api->version('v1', [
         $api->get('actived/users', 'UsersController@activedIndex')
             ->name('api.actived.users.index');
         // 需要 token 验证的接口
-        $api->group(['middleware' => 'api.auth'], function($api) {
+        $api->group(['middleware' => 'api.auth'], function ($api) {
             // 当前登陆用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');

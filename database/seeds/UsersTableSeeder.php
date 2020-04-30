@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -7,8 +16,6 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -37,12 +44,10 @@ class UsersTableSeeder extends Seeder
         $users = factory(User::class)
                         ->times(100)
                         ->make()
-                        ->each(function ($user, $index)
-                            use ($faker, $avatars)
-        {
-            // 从头像数组中随机取出一个并赋值
-            $user->avatar = $faker->randomElement($avatars);
-        });
+                        ->each(function ($user, $index) use ($faker, $avatars) {
+                            // 从头像数组中随机取出一个并赋值
+                            $user->avatar = $faker->randomElement($avatars);
+                        });
 
         // 让隐藏字段可见，并将数据库集合转为数组
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();

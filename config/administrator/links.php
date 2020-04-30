@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use App\Models\Link;
 
 return [
@@ -9,8 +18,7 @@ return [
     'model' => Link::class,
 
     // 访问权限判断
-    'permission' => function ()
-    {
+    'permission' => function () {
         // 只允许站长管资源推荐链接
         return Auth::user()->hasRole('Founder');
     },

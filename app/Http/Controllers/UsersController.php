@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
@@ -22,6 +30,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
+
         return view('users.edit', compact('user'));
     }
 
@@ -38,6 +47,7 @@ class UsersController extends Controller
         }
 
         $user->update($data);
+
         return redirect()->route('users.show', $user->id)->with('success', '个人资料更新成功！');
     }
 }

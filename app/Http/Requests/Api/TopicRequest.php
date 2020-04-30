@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Requests\Api;
 
 class TopicRequest extends FormRequest
@@ -28,6 +37,7 @@ class TopicRequest extends FormRequest
                     'body' => 'required|string',
                     'category_id' => 'required|exists:categories,id',
                 ];
+
                 break;
             case 'PATCH':
                 return [
@@ -35,6 +45,7 @@ class TopicRequest extends FormRequest
                     'body' => 'string',
                     'category_id' => 'exists:categories,id',
                 ];
+
                 break;
         }
     }

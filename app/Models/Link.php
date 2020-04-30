@@ -1,18 +1,28 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cache;
 
 /**
- * App\Models\Link
+ * App\Models\Link.
  *
  * @property int $id
  * @property string $title 资源的描述
  * @property string $link 资源的链接
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link query()
@@ -28,6 +38,7 @@ class Link extends Model
     protected $fillable = ['title', 'link'];
 
     public $cache_key = 'larabbs_links';
+
     protected $cache_expire_in_seconds = 1400 * 60;
 
     public function getAllCached()

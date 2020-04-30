@@ -1,8 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use Illuminate\Http\Request;
+namespace App\Http\Controllers;
 
 class PagesController extends Controller
 {

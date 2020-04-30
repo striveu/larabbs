@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Requests\Api;
 
 class UserRequest extends FormRequest
@@ -29,6 +38,7 @@ class UserRequest extends FormRequest
                     'verification_key' => 'required|string',
                     'verification_code' => 'required|string',
                 ];
+
                 break;
             case 'PUT':
             case 'PATCH':
@@ -40,6 +50,7 @@ class UserRequest extends FormRequest
                     'introduction' => 'max:80',
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,
                 ];
+
                 break;
         }
     }

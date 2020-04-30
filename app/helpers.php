@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 if (!function_exists('route_class')) {
     function route_class()
     {
@@ -18,6 +27,7 @@ if (!function_exists('make_excerpt')) {
     function make_excerpt($value, $length = 20)
     {
         $excerpt = trim(preg_replace('/\r\n|\r|\n+/', ' ', strip_tags($value)));
+
         return str_limit($excerpt, $length);
     }
 }
@@ -39,10 +49,10 @@ if (!function_exists('model_link')) {
         $prefix = $prefix ? "/$prefix/" : '/';
 
         // 使用站点 URL 拼接全量 URL
-        $url = config('app.url') . $prefix . $model_name . '/' . $model->id;
+        $url = config('app.url').$prefix.$model_name.'/'.$model->id;
 
         // 拼接 HTML A 标签，并返回
-        return '<a href="' . $url . '" target="_blank">' . $title . '</a>';
+        return '<a href="'.$url.'" target="_blank">'.$title.'</a>';
     }
 }
 

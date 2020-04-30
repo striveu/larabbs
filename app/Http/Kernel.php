@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -11,6 +20,7 @@ class Kernel extends HttpKernel
      *
      * These middleware are run during every request to your application.
      * 全局中间件
+     *
      * @var array
      */
     protected $middleware = [
@@ -37,7 +47,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewareGroups = [
-
         // Web 中间件组，应用于 routes/web.php 路由文件，
         // 在 RouteServiceProvider 中设定
         'web' => [
@@ -89,7 +98,6 @@ class Kernel extends HttpKernel
      */
     // 中间件别名设置，允许你使用别名调用中间件，例如上面的 api 中间件组调用
     protected $routeMiddleware = [
-
         // 只有登录用户才能访问，我们在控制器的构造方法中大量使用
         'auth' => \App\Http\Middleware\Authenticate::class,
 

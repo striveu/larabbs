@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use App\Models\Topic;
 
 return [
@@ -8,7 +17,6 @@ return [
     'model' => Topic::class,
 
     'columns' => [
-
         'id' => [
             'title' => 'ID',
         ],
@@ -16,7 +24,7 @@ return [
             'title' => '话题',
             'sortable' => false,
             'output' => function ($value, $model) {
-                return '<div style="max-width: 260px">' . model_link($value, $model) . '</div>';
+                return '<div style="max-width: 260px">'.model_link($value, $model).'</div>';
             },
         ],
         'user' => [
@@ -24,7 +32,8 @@ return [
             'sortable' => false,
             'output' => function ($value, $model) {
                 $avatar = e($model->user->avatar);
-                $value = empty($avatar) ? 'N/A' : '<img src="' . $avatar . '" style="height: 22px; width: 22px;"> ' . e($model->user->name);
+                $value = empty($avatar) ? 'N/A' : '<img src="'.$avatar.'" style="height: 22px; width: 22px;"> '.e($model->user->name);
+
                 return model_link($value, $model->user);
             },
         ],

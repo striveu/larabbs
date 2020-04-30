@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -36,7 +45,7 @@ class RepliesController extends Controller
 
     public function index(Topic $topic, Request $request)
     {
-        /**
+        /*
          * 关闭 Dingo 的预加载
          * 有可能使用深层 include 地方都可以暂时这么处理。
          */

@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Handlers\ImageUploadHandler;
 use App\Transformers\ImageTransformer;
@@ -14,7 +22,7 @@ class ImagesController extends Controller
     {
         $user = $this->user();
 
-        $size = $request->type == 'avatar' ? 362 : 1024;
+        $size = 'avatar' == $request->type ? 362 : 1024;
         $result = $uploader->save($request->image, str_plural($request->type), $user->id, $size);
 
         $image->path = $result['path'];

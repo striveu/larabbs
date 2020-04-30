@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\AuthorizationRequest;
@@ -43,7 +51,7 @@ class AuthorizationsController extends Controller
             } else {
                 $token = $request->access_token;
 
-                if ($type == 'weixin') {
+                if ('weixin' == $type) {
                     $driver->setOpenId($request->openid);
                 }
             }
@@ -77,18 +85,21 @@ class AuthorizationsController extends Controller
         }
 
         $token = \Auth::guard('api')->fromUser($user);
+
         return $this->respondWithToken($token);
     }
 
     public function update()
     {
         $token = Auth::guard('api')->refresh();
+
         return $this->respondWithToken($token);
     }
 
     public function destroy()
     {
         Auth::guard('api')->logout();
+
         return $this->response->noContent();
     }
 
@@ -97,7 +108,7 @@ class AuthorizationsController extends Controller
         return $this->response->array([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+            'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60,
         ]);
     }
 

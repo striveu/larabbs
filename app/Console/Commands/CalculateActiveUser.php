@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -9,22 +18,22 @@ class CalculateActiveUser extends Command
 {
     /**
      * The name and signature of the console command.
-     * 供我们调用命令
+     * 供我们调用命令.
+     *
      * @var string
      */
     protected $signature = 'larabbs:calculate-active-user';
 
     /**
      * The console command description.
-     * 命令的描述
+     * 命令的描述.
+     *
      * @var string
      */
     protected $description = '生成活跃用户';
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -33,7 +42,8 @@ class CalculateActiveUser extends Command
 
     /**
      * Execute the console command.
-     * 最终执行的方法
+     * 最终执行的方法.
+     *
      * @return mixed
      */
     public function handle(User $user)

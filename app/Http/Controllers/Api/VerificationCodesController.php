@@ -25,10 +25,11 @@ class VerificationCodesController extends Controller
         if (!$captchaData) {
             abort(403, '图片验证码已失效');
         }
-        
+
         if (!hash_equals(Str::lower($captchaData['code']), $request->captcha_code)) {
             // 验证错误就清除缓存
             \Cache::forget($request->captcha_key);
+
             throw new AuthenticationException('验证码错误');
         }
 
@@ -49,7 +50,7 @@ class VerificationCodesController extends Controller
                 $result = $easySms->send($phone, [
                     'template' => config('easysms.gateways.aliyun.templates.register'),
                     'data' => [
-                        'code' => $code
+                        'code' => $code,
                     ],
                 ]);
             } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {

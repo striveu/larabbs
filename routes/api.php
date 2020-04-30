@@ -13,8 +13,7 @@ Route::prefix('v1')
     ->namespace('Api')
     ->name('api.v1.')
     ->group(function () {
-
-        Route::middleware('throttle:' . config('api.rate_limits.sign.expires') . ',' . config('api.rate_limits.sign.limit'))
+        Route::middleware('throttle:'.config('api.rate_limits.sign.expires').','.config('api.rate_limits.sign.limit'))
             ->group(function () {
                 // 图片验证码
                 Route::post('captchas', 'CaptchasController@store')->name('captchas.store');
@@ -24,11 +23,10 @@ Route::prefix('v1')
                 Route::post('users', 'UsersController@store')->name('users.store');
             });
 
-        Route::middleware('throttle:' . config('api.rate_limits.access.expires') . ',' . config('api.rate_limits.access.limit'))
+        Route::middleware('throttle:'.config('api.rate_limits.access.expires').','.config('api.rate_limits.access.limit'))
             ->group(function () {
-
             });
-});
+    });
 
 $api = app('Dingo\Api\Routing\Router');
 

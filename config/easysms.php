@@ -35,7 +35,7 @@ return [
             'sign_name' => '编码学习网',
             'templates' => [
                 'register' => env('SMS_ALIYUN_TEMPLATE_REGISTER'),
-            ]
+            ],
         ],
         'yunpian' => [
             'api_key' => env('YUNPIAN_API_KEY'),

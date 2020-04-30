@@ -38,12 +38,12 @@ return [
         'contrast' => -5,
     ],
     'mini' => [
-        'length' => 3,
+        'length' => 4,
         'width' => 60,
         'height' => 32,
     ],
     'inverse' => [
-        'length' => 5,
+        'length' => 4,
         'width' => 120,
         'height' => 36,
         'quality' => 90,

@@ -14,16 +14,6 @@ namespace App\Http\Requests\Api;
 class UserRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -33,8 +23,8 @@ class UserRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name',
-                    'password' => 'required|string|min:6',
+                    'name' => 'required|between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name',
+                    'password' => 'required|string|alpha_dash|min:6',
                     'verification_key' => 'required|string',
                     'verification_code' => 'required|string',
                 ];
@@ -45,7 +35,7 @@ class UserRequest extends FormRequest
                 $userId = \Auth::guard('api')->id();
 
                 return [
-                    'name' => 'between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,'.$userId,
+                    'name' => 'between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name,'.$userId,
                     'email' => 'email|unique:users,email,'.$userId,
                     'introduction' => 'max:80',
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,

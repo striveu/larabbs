@@ -1,5 +1,6 @@
 <h1 align="center">Welcome to LaraBBS 👋</h1>
 <p>
+![StyleCI build status](https://github.styleci.io/repos/195837467/shield) 
 <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 <a href="larabbs.strive.net.cn">
 <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />

@@ -9,6 +9,27 @@
  * with this source code in the file LICENSE.
  */
 
+Route::prefix('v1')
+    ->namespace('Api')
+    ->name('api.v1.')
+    ->group(function () {
+
+        Route::middleware('throttle:' . config('api.rate_limits.sign.expires') . ',' . config('api.rate_limits.sign.limit'))
+            ->group(function () {
+                // 图片验证码
+                Route::post('captchas', 'CaptchasController@store')->name('captchas.store');
+                // 短信验证码
+                Route::post('verificationCodes', 'VerificationCodesController@store')->name('verificationCodes.store');
+                // 用户注册
+                Route::post('users', 'UsersController@store')->name('users.store');
+            });
+
+        Route::middleware('throttle:' . config('api.rate_limits.access.expires') . ',' . config('api.rate_limits.access.limit'))
+            ->group(function () {
+
+            });
+});
+
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [

@@ -11,13 +11,19 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
+            'aliyun',
             'yunpian',
         ],
     ],
     // 可用的网关配置
     'gateways' => [
         'errorlog' => [
-            'file' => '/tep/easy-sms.log',
+            'file' => '/tmp/easy-sms.log',
+        ],
+        'aliyun' => [
+            'access_key_id' => env('SMS_ALIYUN_ACCESS_KEY_ID'),
+            'access_key_secret' => env('SMS_ALIYUN_ACCESS_KEY_SECRET'),
+            'sign_name' => '编码学习网',
         ],
         'yunpian' => [
             'api_key' => env('YUNPIAN_API_KEY'),

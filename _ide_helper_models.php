@@ -38,22 +38,10 @@ namespace App\Models{
 /**
  * App\Models\Image
  *
- * @property int $id
- * @property int $user_id
- * @property string $type
- * @property string $path
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereUserId($value)
  */
 	class Image extends \Eloquent {}
 }
@@ -163,6 +151,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic whereViewCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic withOrder($order)
  * @mixin \Eloquent
+ * @property-read int|null $replies_count
  */
 	class Topic extends \Eloquent {}
 }
@@ -206,19 +195,12 @@ namespace App\Models{
  * @mixin \Eloquent
  * @property string|null $last_actived_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastActivedAt($value)
- * @property string|null $phone 手机号
- * @property string|null $weixin_openid
- * @property string|null $weapp_openid
- * @property string|null $weixin_session_key
- * @property string|null $weixin_unionid
- * @property string|null $registration_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRegistrationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWeappOpenid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWeixinOpenid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWeixinSessionKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWeixinUnionid($value)
+ * @property-read int|null $notifications_count
+ * @property-read int|null $permissions_count
+ * @property-read int|null $replies_count
+ * @property-read int|null $roles_count
+ * @property-read int|null $topics_count
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail, \Tymon\JWTAuth\Contracts\JWTSubject {}
 }
 

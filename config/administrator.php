@@ -1,7 +1,15 @@
 <?php
 
-return array(
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+return array(
     /*
      * Package URI
      *
@@ -63,7 +71,7 @@ return array(
      * 		'Analytics' => array('E-Commerce' => 'page.ecommerce.analytics'),
      *	)
      */
-    /**
+    /*
      * 后台菜单数组
      *
      * 数组里的值有三种类型：
@@ -104,7 +112,7 @@ return array(
      *
      * @type closure
      */
-    /**
+    /*
      * 权限控制的回调函数。
      *
      * 此回调函数需要返回 true 或 false，用来检测当前用户是否有权限访问后台。
@@ -121,7 +129,7 @@ return array(
      *
      * @type bool
      */
-    /**
+    /*
      * 使用布尔值来设定是否使用后台主页面
      *
      * 如值为 `true`，将使用 `dashboard_view` 定义的视图文件渲染页面；
@@ -166,7 +174,7 @@ return array(
      *
      * @type string
      */
-    //
+
     'logout_path' => false,
 
     /*

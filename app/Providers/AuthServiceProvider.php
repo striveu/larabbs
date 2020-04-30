@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
@@ -13,15 +22,13 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-		 \App\Models\Reply::class => \App\Policies\ReplyPolicy::class,
-		 \App\Models\Topic::class => \App\Policies\TopicPolicy::class,
+         \App\Models\Reply::class => \App\Policies\ReplyPolicy::class,
+         \App\Models\Topic::class => \App\Policies\TopicPolicy::class,
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
     public function boot()
     {

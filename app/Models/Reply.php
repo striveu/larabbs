@@ -1,9 +1,18 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models;
 
 /**
- * App\Models\Reply
+ * App\Models\Reply.
  *
  * @property int $id
  * @property int $topic_id
@@ -13,6 +22,7 @@ namespace App\Models;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Topic $topic
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reply newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reply newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model ordered()

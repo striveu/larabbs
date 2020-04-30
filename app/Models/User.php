@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +20,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
- * App\Models\User
+ * App\Models\User.
  *
  * @property int $id
  * @property string $name
@@ -29,6 +38,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Topic[] $topics
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User permission($permissions)
@@ -46,7 +56,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
  * @property string|null $last_actived_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastActivedAt($value)
  */
 class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
@@ -126,8 +138,7 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
     public function setPasswordAttribute($value)
     {
         // 如果值的长度等于 60，即认为是已经做过加密的情况
-        if(strlen($value) != 60) {
-
+        if (60 != strlen($value)) {
             // 不等于 60，做密码加密处理
             $value = bcrypt($value);
         }
@@ -138,10 +149,9 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
     public function setAvatarAttribute($path)
     {
         // 如果不是 `http` 子串开头，那就是从后台上传的，需要补全 URL
-        if ( ! starts_with($path, 'http')) {
-
+        if (!starts_with($path, 'http')) {
             // 拼接完整的 URL
-            $path = config('app.url') . "/uploads/images/avatars/$path";
+            $path = config('app.url')."/uploads/images/avatars/$path";
         }
         $this->attributes['avatar'] = $path;
     }

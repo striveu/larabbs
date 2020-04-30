@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -16,8 +25,6 @@ class TopicReplied extends Notification implements ShouldQueue
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
     public function __construct(Reply $reply)
     {
@@ -28,7 +35,8 @@ class TopicReplied extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -40,7 +48,7 @@ class TopicReplied extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         $topic = $this->reply->topic;
-        $link = $topic->link(['#reply' . $this->reply->id]);
+        $link = $topic->link(['#reply'.$this->reply->id]);
 
         // 存入数据库里的数据
         return [
@@ -58,14 +66,15 @@ class TopicReplied extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
+        $url = $this->reply->topic->link(['#reply'.$this->reply->id]);
 
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('你的话题有新回复！')
                     ->action('查看回复', $url);
     }
@@ -73,13 +82,13 @@ class TopicReplied extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 }

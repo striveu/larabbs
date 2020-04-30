@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Spatie\Permission\Models\Role;
 
 return [
@@ -7,8 +16,7 @@ return [
     'single' => '角色',
     'model' => Role::class,
 
-    'permission' => function ()
-    {
+    'permission' => function () {
         return Auth::user()->can('manage_users');
     },
 

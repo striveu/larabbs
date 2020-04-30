@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
@@ -12,14 +21,15 @@ use App\Handlers\SlugTranslateHandler;
 
 class TranslateSlug implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $topic;
 
     /**
      * Create a new job instance.
-     *
-     * @return void
      */
     public function __construct(Topic $topic)
     {
@@ -29,8 +39,6 @@ class TranslateSlug implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
     {

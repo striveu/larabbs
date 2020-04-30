@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -8,19 +17,15 @@ class AddReferences extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::table('topics', function (Blueprint $table) {
-
             // 当 user_id 对应的 users 表数据被删除时，删除词条
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('replies', function (Blueprint $table) {
-
             // 当 user_id 对应的 users 表数据被删除时，删除此条数据
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
@@ -31,8 +36,6 @@ class AddReferences extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateTopicsTable extends Migration
 {
-	public function up()
-	{
-		Schema::create('topics', function(Blueprint $table) {
+    public function up()
+    {
+        Schema::create('topics', function (Blueprint $table) {
             $table->increments('id')->comment('主键');
             $table->string('title')->index()->comment('帖子标题');
             $table->text('body')->comment('帖子内容');
@@ -21,10 +30,10 @@ class CreateTopicsTable extends Migration
             $table->string('slug')->nullable()->comment('title 翻译，SEO 友好的 URL');
             $table->timestamps();
         });
-	}
+    }
 
-	public function down()
-	{
-		Schema::drop('topics');
-	}
+    public function down()
+    {
+        Schema::drop('topics');
+    }
 }

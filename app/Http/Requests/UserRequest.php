@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Requests;
 
 use Auth;
@@ -25,7 +34,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name,' . Auth::id(),
+            'name' => 'required|between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name,'.Auth::id(),
             'email' => 'required|email',
             'introduction' => 'max:80',
             'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=208,min_height=208',

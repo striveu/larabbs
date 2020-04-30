@@ -1,10 +1,17 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers\Api;
 
-use App\Jobs\TranslateSlug;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
 use App\Transformers\UserTransformer;
 use App\Models\Image;
@@ -36,7 +43,7 @@ class UsersController extends Controller
             ->setMeta([
                 'access_token' => \Auth::guard('api')->fromUser($user),
                 'token_type' => 'Bearer',
-                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60,
             ])
             ->setStatusCode(201);
     }
@@ -113,7 +120,7 @@ class UsersController extends Controller
             ->setMeta([
                 'access_token' => \Auth::guard('api')->fromUser($user),
                 'token_type' => 'Bearer',
-                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60,
             ])
             ->setStatusCode(201);
     }

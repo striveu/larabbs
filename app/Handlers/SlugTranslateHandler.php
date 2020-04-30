@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace app\Handlers;
 
 use GuzzleHttp\Client;
@@ -10,7 +19,7 @@ class SlugTranslateHandler
     public function translate($text)
     {
         // 实例化 HTTP 客户端
-        $http = new Client;
+        $http = new Client();
 
         // 初始化配置信息
         $api = 'http://api.fanyi.baidu.com/api/trans/vip/translate?';
@@ -26,7 +35,7 @@ class SlugTranslateHandler
         // 根据文档，生成 sign
         // http://api.fanyi.baidu.com/api/trans/product/apidoc
         // appid+q+salt+密钥 的MD5值
-        $sign = md5($appid . $text . $salt . $key);
+        $sign = md5($appid.$text.$salt.$key);
 
         // 构建请求参数
         $query = http_build_query([
@@ -52,7 +61,7 @@ class SlugTranslateHandler
          *              "dst" => "XSS security vulnerability"
          *          ]
          *      ]
-         *  ]
+         *  ].
          */
 
         // 尝试获取翻译结果

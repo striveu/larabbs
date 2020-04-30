@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use JPush\Client;
 use Illuminate\Notifications\DatabaseNotification;
@@ -13,8 +21,6 @@ class PushNotification implements ShouldQueue
 
     /**
      * Create the event listener.
-     *
-     * @return void
      */
     public function __construct(Client $client)
     {
@@ -24,8 +30,7 @@ class PushNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  object  $event
-     * @return void
+     * @param object $event
      */
     public function handle(DatabaseNotification $notification)
     {
@@ -38,7 +43,7 @@ class PushNotification implements ShouldQueue
 
         // 没有 registration_id 的不推送
         if (!$user->registration_id) {
-            return ;
+            return;
         }
 
         // 推送消息

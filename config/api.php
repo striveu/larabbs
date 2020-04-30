@@ -1,7 +1,15 @@
 <?php
 
-return [
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Standards Tree
@@ -154,7 +162,6 @@ return [
     */
 
     'middleware' => [
-
     ],
 
     /*
@@ -183,7 +190,6 @@ return [
     */
 
     'throttling' => [
-
     ],
 
     /*
@@ -214,22 +220,18 @@ return [
     'defaultFormat' => env('API_DEFAULT_FORMAT', 'json'),
 
     'formats' => [
-
         'json' => Dingo\Api\Http\Response\Format\Json::class,
-
     ],
 
     'formatsOptions' => [
-
         'json' => [
             'pretty_print' => env('API_JSON_FORMAT_PRETTY_PRINT_ENABLED', false),
             'indent_style' => env('API_JSON_FORMAT_INDENT_STYLE', 'space'),
             'indent_size' => env('API_JSON_FORMAT_INDENT_SIZE', 2),
         ],
-
     ],
 
-    /**
+    /*
      * 接口频率限制
      */
     'rate_limits' => [

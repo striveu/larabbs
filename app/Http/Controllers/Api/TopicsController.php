@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -25,6 +34,7 @@ class TopicsController extends Controller
         $this->authorize('update', $topic);
 
         $topic->update($request->all());
+
         return $this->response->item($topic, new TopicTransformer());
     }
 
@@ -33,6 +43,7 @@ class TopicsController extends Controller
         $this->authorize('destroy', $topic);
 
         $topic->delete();
+
         return $this->response->noContent();
     }
 
@@ -47,6 +58,7 @@ class TopicsController extends Controller
         switch ($request->order) {
             case 'recent':
                 $query->recent();
+
                 break;
             default:
                 $query->recentReplied();

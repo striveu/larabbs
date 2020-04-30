@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the overtrue/laravel-wechat.
+ * This file is part of the lucifer103/larabbs.
  *
- * (c) overtrue <i@overtrue.me>
+ * (c) Lucifer <luciferi103@outlook.com>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -94,9 +94,9 @@ return [
      */
      'mini_program' => [
          'default' => [
-             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
-             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
+             'app_id' => env('WECHAT_MINI_PROGRAM_APPID', ''),
+             'secret' => env('WECHAT_MINI_PROGRAM_SECRET', ''),
+             'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
              'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
          ],
      ],

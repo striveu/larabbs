@@ -1,32 +1,40 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Requests;
 
 class TopicRequest extends Request
 {
     public function rules()
     {
-        switch($this->method())
-        {
+        switch ($this->method()) {
             // CREATE
             case 'POST':
             // UPDATE
             case 'PUT':
             case 'PATCH':
-            {
+
                 return [
                     // UPDATE ROLES
                     'title' => 'required|min:2',
                     'body' => 'required|min:3',
                     'category_id' => 'required|numeric',
                 ];
-            }
+
             case 'GET':
             case 'DELETE':
             default:
-            {
+
                 return [];
-            };
+            ;
         }
     }
 

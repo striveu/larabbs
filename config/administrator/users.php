@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use App\Models\User;
 
 return [
@@ -14,14 +23,12 @@ return [
 
     // 设置当前页面的访问权限，通过返回布尔值来控制权限。
     // 返回 True 即通过权限验证，False 则无权访问并从 Menu 中隐藏
-    'permission' => function ()
-    {
+    'permission' => function () {
         return Auth::user()->can('manage_users');
     },
 
     // 字段负责渲染『表格数据』，由无数的『列』组成，
     'columns' => [
-
         // 列的标示，这是一个最小化『列』信息配置的例子，读取的是模型里对应的属性的值，如 $model->id
         'id',
 
@@ -77,7 +84,7 @@ return [
             'type' => 'image',
 
             // 图片上传必须设置图片存放路径
-            'location' => public_path() . '/uploads/images/avatars/',
+            'location' => public_path().'/uploads/images/avatars/',
         ],
         'roles' => [
             'title' => '用户角色',
@@ -93,7 +100,6 @@ return [
     // 『数据过滤』设置
     'filters' => [
         'id' => [
-
             // 过滤表单条目显示名称
             'title' => '用户 ID',
         ],

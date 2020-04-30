@@ -1,10 +1,17 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Topic;
 use Tests\Traits\ActingJWTUser;
@@ -103,11 +110,8 @@ class TopicApiTest extends TestCase
         $response->assertStatus(404);
     }
 
-
     /**
      * A basic feature test example.
-     *
-     * @return void
      */
     public function testExample()
     {

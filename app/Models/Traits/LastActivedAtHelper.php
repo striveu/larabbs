@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models\Traits;
 
 use Carbon\Carbon;
@@ -9,6 +18,7 @@ trait LastActivedAtHelper
 {
     // 缓存相关
     protected $hash_prefix = 'larabbs_last_actived_at_';
+
     protected $field_prefix = 'user_';
 
     public function recordLastActivedAt()
@@ -59,7 +69,7 @@ trait LastActivedAtHelper
         $field = $this->getHashField();
 
         // 三元运算符，优先选择 Redis 的数据，否则使用数据库中
-        $datetime = Redis::hGet($hash, $field) ? : $value;
+        $datetime = Redis::hGet($hash, $field) ?: $value;
 
         // 如果存在的话，返回时间对应的 Carbon 实体
         if ($datetime) {
@@ -73,12 +83,12 @@ trait LastActivedAtHelper
     public function getHashFromDateString($date)
     {
         // Redis 哈希表的命名，如：larabbs_last_actived_at_2019-07-30
-        return $this->hash_prefix . $date;
+        return $this->hash_prefix.$date;
     }
 
     public function getHashField()
     {
         // 字段名称，如：user_1
-        return $this->field_prefix . $this->id;
+        return $this->field_prefix.$this->id;
     }
 }

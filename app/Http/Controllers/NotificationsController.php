@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
 
 class NotificationsController extends Controller
@@ -18,6 +26,7 @@ class NotificationsController extends Controller
         $notifications = Auth::user()->notifications()->paginate(20);
         // 标记为已读，未读数量清零
         Auth::user()->markAsRead();
+
         return view('notifications.index', compact('notifications'));
     }
 }

@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the lucifer103/larabbs.
+ *
+ * (c) Lucifer <luciferi103@outlook.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Category
+ * App\Models\Category.
  *
  * @property int $id
  * @property string $name 名称
@@ -13,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $post_count 帖子数
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category query()

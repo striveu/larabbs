@@ -16,6 +16,7 @@ use App\Http\Requests\Api\UserRequest;
 use App\Models\Image;
 use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -40,17 +41,17 @@ class UsersController extends Controller
         // 清除验证码缓存
         \Cache::forget($request->verification_key);
 
-        return new UserResource($user);
+        return (new UserResource($user))->showSensitiveFields();
     }
 
-    public function me()
+    public function me(Request $request)
     {
-        return $this->response->item($this->user(), new UserTransformer());
+        return (new UserResource($request->user()))->showSensitiveFields();;
     }
 
     public function update(UserRequest $request)
     {
-        $user = $this->user();
+        $user = $request->user();
 
         $attributes = $request->only(['name', 'email', 'introduction', 'registration_id']);
 
@@ -61,7 +62,7 @@ class UsersController extends Controller
         }
         $user->update($attributes);
 
-        return $this->response->item($user, new UserTransformer());
+        return (new UserResource($user))->showSensitiveFields();
     }
 
     public function activedIndex(User $user)
@@ -120,8 +121,8 @@ class UsersController extends Controller
             ->setStatusCode(201);
     }
 
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
-        return $this->response->item($user, new UserTransformer());
+        return new UserResource($user);
     }
 }

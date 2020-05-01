@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
                 break;
             case 'PUT':
             case 'PATCH':
-                $userId = \Auth::guard('api')->id();
+                $userId = auth('api')->id();
 
                 return [
                     'name' => 'between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name,'.$userId,

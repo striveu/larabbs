@@ -33,6 +33,20 @@ Route::prefix('v1')
 
         Route::middleware('throttle:'.config('api.rate_limits.access.limit').','.config('api.rate_limits.access.expires'))
             ->group(function () {
+                // 游客可以访问的接口
+
+                // 某个用户的详情
+                Route::get('users/{user}', 'UsersController@show')->name('users.show');
+
+                // 登录后可以访问的接口
+                Route::middleware('auth:api')->group(function() {
+                    // 当前登录用户信息
+                    Route::get('user', 'UsersController@me')->name('user.show');
+                    // 上传图片
+                    Route::post('images', 'ImagesController@store')->name('images.store');
+                    // 编辑登录用户信息
+                    Route::patch('user', 'UsersController@update')->name('user.update');
+                });
             });
     });
 
@@ -53,9 +67,6 @@ $api->version('v1', [
         // 小程序注册
         $api->post('weapp/users', 'UsersController@weappStore')
             ->name('api.weapp.users.store');
-        // 用户详情
-        $api->get('users/{user}', 'UsersController@show')
-            ->name('api.users.show');
         // 分类列表
         $api->get('categories', 'CategoriesController@index')
             ->name('api.categories.index');
@@ -82,17 +93,11 @@ $api->version('v1', [
             ->name('api.actived.users.index');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
-            // 当前登陆用户信息
-            $api->get('user', 'UsersController@me')
-                ->name('api.user.show');
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.patch');
             $api->put('user', 'UsersController@update')
                 ->name('api.user.update');
-            // 图片资源
-            $api->post('images', 'ImagesController@store')
-                ->name('api.images.store');
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');

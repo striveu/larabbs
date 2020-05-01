@@ -15,7 +15,6 @@ use App\Models\Image;
 use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\Api\ImageRequest;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Resources\ImageResource;
 
 class ImagesController extends Controller

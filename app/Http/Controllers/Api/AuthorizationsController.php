@@ -16,6 +16,8 @@ use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\AuthorizationRequest;
 use Auth;
 use App\Http\Requests\Api\WeappAuthorizationRequest;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Arr;
 
 class AuthorizationsController extends Controller
 {
@@ -30,10 +32,10 @@ class AuthorizationsController extends Controller
         $credentials['password'] = $request->password;
 
         if (!$token = \Auth::guard('api')->attempt($credentials)) {
-            return $this->response->errorUnauthorized(trans('auth.failed'));
+            throw new AuthenticationException(trans('auth.failed'));
         }
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     public function socialStore($type, SocialAuthorizationRequest $request)
@@ -47,7 +49,7 @@ class AuthorizationsController extends Controller
         try {
             if ($code = $request->code) {
                 $response = $driver->getAccessTokenResponse($code);
-                $token = array_get($response, 'access_token');
+                $token = Arr::get($response, 'access_token');
             } else {
                 $token = $request->access_token;
 
@@ -58,7 +60,7 @@ class AuthorizationsController extends Controller
 
             $oauthUser = $driver->userFromToken($token);
         } catch (\Exception $e) {
-            return $this->response->errorUnauthorized('参数错误，未获取用户信息');
+            throw new AuthenticationException('参数错误，未获取用户信息');
         }
 
         switch ($type) {
@@ -84,28 +86,28 @@ class AuthorizationsController extends Controller
                 break;
         }
 
-        $token = \Auth::guard('api')->fromUser($user);
+        $token = auth('api')->login($user);
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     public function update()
     {
-        $token = Auth::guard('api')->refresh();
+        $token = auth('api')->refresh();
 
         return $this->respondWithToken($token);
     }
 
     public function destroy()
     {
-        Auth::guard('api')->logout();
+        auth('api')->logout();
 
-        return $this->response->noContent();
+        return response(null, 204);
     }
 
     public function respondWithToken($token)
     {
-        return $this->response->array([
+        return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60,

@@ -46,7 +46,7 @@ class UsersController extends Controller
 
     public function me(Request $request)
     {
-        return (new UserResource($request->user()))->showSensitiveFields();;
+        return (new UserResource($request->user()))->showSensitiveFields();
     }
 
     public function update(UserRequest $request)

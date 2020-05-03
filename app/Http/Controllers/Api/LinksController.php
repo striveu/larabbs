@@ -12,7 +12,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Link;
-use App\Transformers\LinkTransformer;
+use Illuminate\Http\Request;
+use App\Http\Resources\LinkResource;
 
 class LinksController extends Controller
 {
@@ -20,6 +21,6 @@ class LinksController extends Controller
     {
         $links = $link->getAllCached();
 
-        return $this->response->collection($links, new LinkTransformer());
+        return LinkResource::collection($links);
     }
 }

@@ -11,14 +11,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Transformers\PermissionTransformer;
+use Illuminate\Http\Request;
+use App\Http\Resources\PermissionResource;
 
 class PermissionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = $this->user()->getAllPermissions();
+        $permissions = $request->user()->getAllPermissions();
 
-        return $this->response->collection($permissions, new PermissionTransformer());
+        PermissionResource::wrap('data');
+        return PermissionResource::collection($permissions);
     }
 }

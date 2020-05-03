@@ -13,20 +13,20 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Topic;
-use App\Transformers\TopicTransformer;
 use App\Http\Requests\Api\TopicRequest;
 use App\Models\User;
+use App\Http\Resources\TopicResource;
+use App\Http\Queries\TopicQuery;
 
 class TopicsController extends Controller
 {
     public function store(TopicRequest $request, Topic $topic)
     {
         $topic->fill($request->all());
-        $topic->user_id = $this->user()->id;
+        $topic->user_id = $request->user()->id;
         $topic->save();
 
-        return $this->response->item($topic, new TopicTransformer())
-            ->setStatusCode(201);
+        return new TopicResource($topic);
     }
 
     public function update(TopicRequest $request, Topic $topic)
@@ -35,7 +35,7 @@ class TopicsController extends Controller
 
         $topic->update($request->all());
 
-        return $this->response->item($topic, new TopicTransformer());
+        return new TopicResource($topic);
     }
 
     public function destroy(Topic $topic)
@@ -44,41 +44,26 @@ class TopicsController extends Controller
 
         $topic->delete();
 
-        return $this->response->noContent();
+        return response(null, 204);
     }
 
-    public function index(Request $request, Topic $topic)
+    public function index(Request $request, TopicQuery $query)
     {
-        $query = $topic->query();
+        $topics = $query->paginate();
 
-        if ($categoryId = $request->category_id) {
-            $query->where('category_id', $categoryId);
-        }
-
-        switch ($request->order) {
-            case 'recent':
-                $query->recent();
-
-                break;
-            default:
-                $query->recentReplied();
-        }
-
-        $topics = $query->paginate(20);
-
-        return $this->response->paginator($topics, new TopicTransformer());
+        return TopicResource::collection($topics);
     }
 
-    public function userIndex(User $user, Request $request)
+    public function userIndex(Request $request, User $user, TopicQuery $query)
     {
-        $topics = $user->topics()->recent()
-            ->paginate(20);
+        $topics = $query->where('user_id', $user->id)->paginate();
 
-        return $this->response->paginator($topics, new TopicTransformer());
+        return TopicResource::collection($topics);
     }
 
-    public function show(Topic $topic)
+    public function show($topicId, TopicQuery $query)
     {
-        return $this->response->item($topic, new TopicTransformer());
+        $topic = $query->findOrFail($topicId);
+        return new TopicResource($topic);
     }
 }

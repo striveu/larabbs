@@ -19,11 +19,4 @@ class ReplyRequest extends Request
             'content' => 'required|min:2',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            // Validation messages
-        ];
-    }
 }

@@ -14,9 +14,10 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Reply;
-use App\Transformers\ReplyTransformer;
 use App\Http\Requests\Api\ReplyRequest;
 use App\Models\User;
+use App\Http\Resources\ReplyResource;
+use App\Http\Queries\ReplyQuery;
 
 class RepliesController extends Controller
 {
@@ -24,52 +25,35 @@ class RepliesController extends Controller
     {
         $reply->content = $request->content;
         $reply->topic()->associate($topic);
-        $reply->user()->associate($this->user());
+        $reply->user()->associate($request->user());
         $reply->save();
 
-        return $this->response->item($reply, new ReplyTransformer())
-            ->setStatusCode(201);
+        return new ReplyResource($reply);
     }
 
     public function destroy(Topic $topic, Reply $reply)
     {
         if ($reply->topic_id != $topic->id) {
-            return $this->response->errorBadRequest();
+            abort(404);
         }
 
         $this->authorize('destroy', $reply);
         $reply->delete();
 
-        return $this->response->noContent();
+        return response(null, 204);
     }
 
-    public function index(Topic $topic, Request $request)
+    public function index($topicId, ReplyQuery $query)
     {
-        /*
-         * 关闭 Dingo 的预加载
-         * 有可能使用深层 include 地方都可以暂时这么处理。
-         */
-        app(\Dingo\Api\Transformer\Factory::class)->disableEagerLoading();
+        $replies = $query->where('topic_id', $topicId)->paginate();
 
-        $replies = $topic->replies()->paginate(20);
-
-        if ($request->include) {
-            $replies->load(explode(',', $request->include));
-        }
-
-        return $this->response->paginator($replies, new ReplyTransformer());
+        return ReplyResource::collection($replies);
     }
 
-    public function userIndex(User $user, Request $request)
+    public function userIndex($userId, ReplyQuery $query)
     {
-        app(\Dingo\Api\Transformer\Factory::class)->disableEagerLoading();
+        $replies = $query->where('user_id', $userId)->paginate();
 
-        $replies = $user->replies()->paginate(20);
-
-        if ($request->include) {
-            $replies->load(explode(',', $request->include));
-        }
-
-        return $this->response->paginator($replies, new ReplyTransformer());
+        return ReplyResource::collection($replies);
     }
 }

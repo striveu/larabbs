@@ -67,7 +67,8 @@ class UsersController extends Controller
 
     public function activedIndex(User $user)
     {
-        return $this->response->collection($user->getActiveUsers(), new UserTransformer());
+        UserResource::wrap('data');
+        return UserResource::collection($user->getActiveUsers());
     }
 
     public function weappStore(UserRequest $request)

@@ -11,28 +11,29 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Transformers\NotificationTransformer;
+use Illuminate\Http\Request;
+use App\Http\Resources\NotificationResource;
 
 class NotificationsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notifications = $this->user->notifications()->paginate(20);
+        $notifications = $request->user()->notifications()->paginate();
 
-        return $this->response->paginator($notifications, new NotificationTransformer());
+        return NotificationResource::collection($notifications);
     }
 
-    public function stats()
+    public function stats(Request $request)
     {
-        return $this->response->array([
-            'unread_count' => $this->user()->notification_count,
+        return response()->json([
+            'unread_count' => $request->user()->notification_count,
         ]);
     }
 
-    public function read()
+    public function read(Request $request)
     {
-        $this->user()->markAsRead();
+        $request->user()->markAsRead();
 
-        return $this->response->noContent();
+        return response(null, 204);
     }
 }

@@ -14,11 +14,13 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Topic;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Traits\ActingJWTUser;
 
 class TopicApiTest extends TestCase
 {
-    use ActingJWTUser;
+    use RefreshDatabase, ActingJWTUser;
 
     protected $user;
 
@@ -34,7 +36,7 @@ class TopicApiTest extends TestCase
         $data = ['category_id' => 1, 'body' => 'test body', 'title' => 'test title'];
 
         $response = $this->JWTActingAs($this->user)
-            ->json('POST', '/api/topics', $data);
+            ->json('POST', '/api/v1/topics', $data);
 
         $assertData = [
             'category_id' => 1,
@@ -54,7 +56,7 @@ class TopicApiTest extends TestCase
         $editData = ['category_id' => 2, 'body' => 'edit body', 'title' => 'edit title'];
 
         $response = $this->JWTActingAs($this->user)
-            ->json('PATCH', '/api/topics/'.$topic->id, $editData);
+            ->json('PATCH', '/api/v1/topics/'.$topic->id, $editData);
 
         $assertData = [
             'category_id' => 2,
@@ -78,7 +80,7 @@ class TopicApiTest extends TestCase
     public function testShowTopic()
     {
         $topic = $this->makeTopic();
-        $response = $this->json('GET', '/api/topics/'.$topic->id);
+        $response = $this->json('GET', '/api/v1/topics/'.$topic->id);
 
         $assertData = [
             'category_id' => $topic->category_id,
@@ -93,7 +95,7 @@ class TopicApiTest extends TestCase
 
     public function testIndexTopic()
     {
-        $response = $this->json('GET', '/api/topics/');
+        $response = $this->json('GET', '/api/v1/topics/');
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data', 'meta']);
@@ -103,10 +105,10 @@ class TopicApiTest extends TestCase
     {
         $topic = $this->makeTopic();
         $response = $this->JWTActingAs($this->user)
-            ->json('DELETE', '/api/topics/'.$topic->id);
+            ->json('DELETE', '/api/v1/topics/'.$topic->id);
         $response->assertStatus(204);
 
-        $response = $this->json('GET', '/api/topics/'.$topic->id);
+        $response = $this->json('GET', '/api/v1/topics/'.$topic->id);
         $response->assertStatus(404);
     }
 

@@ -20,6 +20,7 @@
         "jpush/jpush": "^3.6",
         "laravel/framework": "5.8.*",
         "laravel/horizon": "~3.1",
+        "laravel/passport": "^7.2",
         "laravel/tinker": "^1.0",
         "lorisleiva/laravel-deployer": "^0.3.0",
         "mews/captcha": "~2.0",

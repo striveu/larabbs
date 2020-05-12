@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
 
         // 修正代理服务器后的服务器参数
         \App\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\PerformanceDebug::class,
     ];
 
     /**

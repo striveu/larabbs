@@ -26,6 +26,8 @@ Route::prefix('v1')
                 Route::post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')->where('social_type', 'weixin')->name('socials.authorizations.store');
                 // 登录
                 Route::post('authorizations', 'AuthorizationsController@store')->name('authorizations.store');
+                // 小程序登录
+                Route::post('weapp/authorizations', 'AuthorizationsController@weappStore')->name('weapp.authorizations.store');
                 // 刷新 token
                 Route::put('authorizations/current', 'AuthorizationsController@update')->name('authorizations.upodate');
                 // 删除 token
@@ -63,6 +65,7 @@ Route::prefix('v1')
                     Route::post('images', 'ImagesController@store')->name('images.store');
                     // 编辑登录用户信息
                     Route::patch('user', 'UsersController@update')->name('user.update');
+                    Route::put('user', 'UsersController@update')->name('user.update');
                     // 发布话题
                     Route::resource('topics', 'TopicsController')->only([
                         'store', 'update', 'destroy',

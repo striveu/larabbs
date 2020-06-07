@@ -124,19 +124,19 @@ class AuthorizationsController extends Controller
 
         // 如果结果错误，说明 code 已过期或不正确，返回 401 错误
         if (isset($data['errcode'])) {
-            return $this->response->errorUnauthorized('code 不正确');
+            throw new AuthenticationException('code 不正确');
         }
 
         // 找到 openid 对应的用户
         $user = User::where('weapp_openid', $data['openid'])->first();
 
-        $attributes['wexin_session_key'] = $data['session_key'];
+        $attributes['weixin_session_key'] = $data['session_key'];
 
         // 未找到对应用户则需要提交用户名密码进行用户绑定
         if (!$user) {
             // 如果未提交用户名密码，403 错误提示
             if (!$request->username) {
-                return $this->response->errorForbidden('用户不存在');
+                throw new AuthenticationException('用户不存在');
             }
 
             $username = $request->username;
@@ -149,12 +149,12 @@ class AuthorizationsController extends Controller
             $credentials['password'] = $request->password;
 
             // 验证用户名和密码是否正确
-            if (!Auth::guard('api')->once($credentials)) {
-                return $this->response->errorUnauthorized('用户名或密码错误');
+            if (!auth('api')->once($credentials)) {
+                throw new AuthenticationException('用户名或密码错误');
             }
 
             // 获取对应的用户
-            $user = Auth::guard('api')->getUser();
+            $user = auth('api')->getUser();
             $attributes['weapp_openid'] = $data['openid'];
         }
 
@@ -162,7 +162,7 @@ class AuthorizationsController extends Controller
         $user->update($attributes);
 
         // 为对应用户创建 JWT
-        $token = Auth::guard('api')->fromUser($user);
+        $token = auth('api')->fromUser($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }

@@ -162,7 +162,7 @@ class AuthorizationsController extends Controller
         $user->update($attributes);
 
         // 为对应用户创建 JWT
-        $token = auth('api')->fromUser($user);
+        $token = auth('api')->login($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }

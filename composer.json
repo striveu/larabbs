@@ -21,7 +21,7 @@
         "laravel/framework": "5.8.*",
         "laravel/horizon": "~3.1",
         "laravel/tinker": "^1.0",
-        "lorisleiva/laravel-deployer": "^0.3.0",
+        "lorisleiva/laravel-deployer": "^0.3.2",
         "mews/captcha": "~2.0",
         "mews/purifier": "~2.0",
         "overtrue/easy-sms": "^1.1",
@@ -33,7 +33,7 @@
         "spatie/laravel-permission": "~2.29",
         "spatie/laravel-query-builder": "^2.8",
         "summerblue/administrator": "~1.1",
-        "tymon/jwt-auth": "1.0.0",
+        "tymon/jwt-auth": "1.0.0-rc.4.1",
         "viacreative/sudo-su": "~1.1"
     },
     "require-dev": {
